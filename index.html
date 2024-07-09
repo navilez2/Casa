@@ -65,11 +65,7 @@
             <div>
                 <img src="img/casa.png">
             </div>
-            <label id="lblMes"></label>
             <label id="lblDia"></label>
-            <label id="lblHora"></label>
-            <label id="lblMinuto"></label>
-            <label id="lblSegundo"></label>
         </div>
     </div>
 
@@ -78,19 +74,17 @@
 
         function atualizarContador() {
             const agora = new Date();
-            const diferenca = dataAlvo - agora;
 
-            const meses = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 30));
-            const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+            // Converte a data de destino para um objeto Date
+            const dataDestino = new Date(dataAlvo);
 
-            document.getElementById('lblMes').innerHTML = `${meses} Meses`;
-            document.getElementById('lblDia').innerHTML = `${dias} Dias`;
-            document.getElementById('lblHora').innerHTML = `${horas} Horas`;
-            document.getElementById('lblMinuto').innerHTML = `${minutos} Minutos`;
-            document.getElementById('lblSegundo').innerHTML = `${segundos} Segundos`;
+            // Calcula a diferença em milissegundos
+            const diferencaTempo = dataDestino - agora;
+
+            // Converte a diferença de tempo de milissegundos para dias
+            const diasRestantes = Math.ceil(diferencaTempo / (1000 * 60 * 60 * 24));
+
+            document.getElementById('lblDia').innerHTML = `${diasRestantes} Dias`;
         }
 
         setInterval(atualizarContador, 1000);
